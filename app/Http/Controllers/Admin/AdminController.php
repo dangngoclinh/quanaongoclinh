@@ -1,18 +1,12 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminBaseController;
 /**
 * AdminController
 */
-class AdminController extends Controller
+class AdminController extends AdminBaseController
 {
-	
-	function __construct()
-	{
-		# code...
-	}
-
 	public function index()
 	{
 		$data['title'] = "Trang Chủ";

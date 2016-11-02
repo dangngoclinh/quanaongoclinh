@@ -24,32 +24,25 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">DANH MỤC</li>
+        <li class="treeview">
+          <a href="<?php echo URL::route('admin');?>">
+            <i class="fa fa-dashboard"></i> <span>Trang Chủ</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-files-o"></i>
+            <span>Quản Lý Sản Phẩm</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li><a href="<?php echo URL::route('admincategory');?>"><i class="fa fa-circle-o"></i> Quản Lý Danh Mục 1</a></li>
+            <li><a href="<?php echo URL::route('admincategory');?>"><i class="fa fa-circle-o"></i> Quản Lý Danh Mục 2</a></li>
+            <li><a href="<?php echo URL::route('adminproduct');?>"><i class="fa fa-circle-o"></i> Danh Sách Sản Phẩm</a></li>
+            <li><a href="<?php echo URL::route('adminproductadd');?>"><i class="fa fa-circle-o"></i> Thêm Sản Phẩm</a></li>
           </ul>
         </li>
         <li>
