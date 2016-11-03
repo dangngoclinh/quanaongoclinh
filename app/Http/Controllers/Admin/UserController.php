@@ -12,24 +12,31 @@ class UserController extends AdminBaseController
 {
 	public function index()
 	{
-		return view('admin.user.index');
+		return view('admin.user.index', $this->data);
 	}
 
 	public function edit($id)
 	{
-		$data['id'] = $id;
-		return view('admin.user.edit', $data);
-
+		return view('admin.user.edit', $this->data);
 	}
 
 	public function delete($id)
 	{
-		$data['id'] = $id;
+
 	}
 
 	public function add()
 	{
-		$data['id'] = $id;
-		return view('admin.user.add', $data);
+		return view('admin.user.add', $this->data);
+	}
+
+	public function shop() 
+	{
+		return view('admin.user.index', $this->data);
+	}
+
+	public function partner() 
+	{
+		return view('admin.user.index', $this->data);
 	}
 }

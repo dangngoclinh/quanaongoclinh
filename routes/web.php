@@ -38,10 +38,17 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('order/delete/{id}', 'OrderController@delete')->name('adminorderdelete');
 	Route::get('order/view/{ỉ}', 'OrderController@view')->name('adminorderview');
 
-	Route::get('admin/email', 'EmailController@index')->name('adminemail');
+	Route::get('email', 'EmailController@index')->name('adminemail');
 
 	Route::get('news', 'NewsController@index')->name('adminnews');
 	Route::get('news/add', 'NewsController@add')->name('adminnewsadd');
 	Route::get('news/guide', 'NewsController@guide')->name('adminnewsguide');
 	Route::get('news/edit/{id}', 'NewsController@edit')->where('id', '[0-9]+')->name('adminnewsedit');
+
+	Route::get('user', 'UserController@index')->name('adminuser');
+	Route::get('user/add', 'UserController@add')->name('adminuseradd');
+	Route::get('user/edit/{id}', 'UserController@edit')->where('id', '[0-9]+')->name('adminuseredit');
+	Route::get('user/delete/{id}', 'UserController@delete')->where('id', '[0-9]+')->name('adminuserdelete');
+	Route::get('user/shop', 'UserController@shop')->name('adminusershop');
+	Route::get('user/partner', 'UserController@partner')->name('adminuserpartner');
 });

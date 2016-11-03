@@ -60,6 +60,20 @@
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-user"></i> <span>Người Dùng</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo URL::route('adminuser');?>"><i class="fa fa-circle-o"></i> Danh Sách</a></li>
+            <li><a href="<?php echo URL::route('adminuseradd');?>"><i class="fa fa-circle-o"></i> Thêm Người Dùng</a></li>
+            <li><a href="<?php echo URL::route('adminusershop');?>"><i class="fa fa-circle-o"></i> Danh Sách Đại Lý</a></li>
+            <li><a href="<?php echo URL::route('adminuserpartner');?>"><i class="fa fa-circle-o"></i> Danh Sách Đối Tác</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Charts</span>
             <span class="pull-right-container">
