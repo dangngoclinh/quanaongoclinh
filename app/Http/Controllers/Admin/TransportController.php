@@ -12,4 +12,9 @@ class TransportController extends AdminBaseController
 	{
 		return view('admin.transport.index', $this->data);
 	}
+
+	public function add()
+	{
+		return view('admin.transport.add', $this->data);
+	}
 }
