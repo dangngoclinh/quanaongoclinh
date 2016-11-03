@@ -16,5 +16,6 @@ class AdminBaseController extends Controller
 	{
 		$this->data['breadcrumb'] = array('home');
 		$this->data['title'] = '';
+		$this->data['pagetitle'] = 'Trang Chủ';
 	}
 }

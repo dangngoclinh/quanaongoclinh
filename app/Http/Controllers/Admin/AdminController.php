@@ -9,9 +9,7 @@ class AdminController extends AdminBaseController
 {
 	public function index()
 	{
-		$data['title'] = "Trang Chủ";
-
-		return view('admin.index', $data);
+		return view('admin.index', $this->data);
 	}
 
 	public function login()

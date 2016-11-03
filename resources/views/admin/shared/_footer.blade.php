@@ -16,6 +16,7 @@
 <script src="<?php echo asset('public/adminlte/js/demo.js');?>"></script>
 <!-- Admin Style Option -->
 <script src="<?php echo asset('public/js/admin.js');?>"></script>
+
 @yield('footer_script')
 </body>
 </html>

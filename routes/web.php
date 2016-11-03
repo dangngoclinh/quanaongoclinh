@@ -15,37 +15,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin', 'Admin\AdminController@index')->name('admin');
-
+// Route Admin Login
 Route::get('admin/login', 'Admin\AdminController@login')->name('adminlogin');
 
-Route::get('admin/category', 'Admin\CategoryController@index')->name('admincategory');
+// Route Admin
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
-Route::get('admin/category/edit/{id}', 'Admin\CategoryController@edit')->where('id', '[0-9]+')->name('admincategoryedit');
+    Route::get('/', 'AdminController@index')->name('admin');
 
-Route::get('admin/category/delete/{id}', 'Admin\CategoryController@delete')->where('id', '[0-9]+')->name('admincategorydelete');
+	Route::get('category', 'CategoryController@index')->name('admincategory');
+	Route::get('category/edit/{id}', 'CategoryController@edit')->where('id', '[0-9]+')->name('admincategoryedit');
+	Route::get('category/delete/{id}', 'CategoryController@delete')->where('id', '[0-9]+')->name('admincategorydelete');
 
-Route::get('admin/product', 'Admin\ProductController@index')->name('adminproduct');
+	Route::get('product', 'ProductController@index')->name('adminproduct');
+	Route::get('product/add', 'ProductController@add')->name('adminproductadd');
+	Route::get('product/edit/{id}', 'ProductController@edit')->where('name', '[0-9]+')->name('adminproductedit');
+	Route::get('product/delete/{id}', 'ProductController@delete')->where('name', '[0-9]+')->name('adminproductdelete');
 
-Route::get('admin/product/add', 'Admin\ProductController@add')->name('adminproductadd');
+	Route::get('order', 'OrderController@index')->name('adminorder');
+	Route::get('order/add', 'OrderController@add')->name('adminorderadd');
+	Route::get('order/edi/{id}', 'OrderController@edit')->name('adminorderedit');
+	Route::get('order/delete/{id}', 'OrderController@delete')->name('adminorderdelete');
+	Route::get('order/view/{ỉ}', 'OrderController@view')->name('adminorderview');
 
-Route::get('admin/product/edit/{id}', 'Admin\ProductController@edit')->where('name', '[0-9]+')->name('adminproductedit');
+	Route::get('admin/email', 'EmailController@index')->name('adminemail');
 
-Route::get('admin/product/delete/{id}', 'Admin\ProductController@delete')->where('name', '[0-9]+')->name('adminproductdelete');
-
-Route::get('admin/order', 'Admin\OrderController@index')->name('adminorder');
-
-Route::get('admin/order/add', 'Admin\OrderController@add')->name('adminorderadd');
-
-Route::get('admin/order/edi/{id}', 'Admin\OrderController@edit')->name('adminorderedit');
-
-Route::get('admin/order/delete/{id}', 'Admin\OrderController@delete')->name('adminorderdelete');
-
-Route::get('admin/order/view/{ỉ}', 'Admin\OrderController@view')->name('adminorderview');
-
-Route::get('admin/email', 'Admin\EmailController@index')->name('adminemail');
-
-
-
-
-
+	Route::get('news', 'NewsController@index')->name('adminnews');
+	Route::get('news/add', 'NewsController@add')->name('adminnewsadd');
+	Route::get('news/guide', 'NewsController@guide')->name('adminnewsguide');
+	Route::get('news/edit/{id}', 'NewsController@edit')->where('id', '[0-9]+')->name('adminnewsedit');
+});

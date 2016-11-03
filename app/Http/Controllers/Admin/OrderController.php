@@ -17,20 +17,16 @@ class OrderController extends MyBaseController
 
 	public function edit($id)
 	{
-		$data['id'] = $id;
-		return view('admin.order.edit', $data);
+		return view('admin.order.edit', $this->data);
 
 	}
 
 	public function delete($id)
 	{
-		$data['id'] = $id;
-		return view('admin.order.delete', $data);
 	}
 
 	public function view($id) 
 	{
-		$data['id'] = $id;
-		return view('admin.order.view', $data);
+		return view('admin.order.view', $this->data);
 	}
 }

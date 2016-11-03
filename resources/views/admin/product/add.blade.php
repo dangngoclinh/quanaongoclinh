@@ -1,9 +1,5 @@
 @extends('admin.shared._layout')
 
-@section('title', 'Thêm Sản Phẩm')
-
-@section('page_title', 'Quản Lý Sản Phẩm')
-
 @section('header_script')
 <link rel="stylesheet" href="<?php echo asset('public/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css');?>">
 @endsection
