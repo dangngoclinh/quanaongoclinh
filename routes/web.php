@@ -52,3 +52,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('user/shop', 'UserController@shop')->name('adminusershop');
 	Route::get('user/partner', 'UserController@partner')->name('adminuserpartner');
 });
+
+Route::get('facebook', 'FacebookController@index');
+Route::get('facebook/info', 'FacebookController@info')->name('facebookinfo');
