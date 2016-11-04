@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\AdminBaseController;
-use App\Library\MyFacebook;
+use App\Library\Facebook\MyFacebook;
 use Redirect;
 
 /**
@@ -21,7 +21,7 @@ class FacebookController extends AdminBaseController
 	{
 		$helper = $this->fb->getRedirectLoginHelper();
 		$permissions = ['email']; // Optional permissions
-		$loginUrl = $helper->getLoginUrl(route('facebookinfo'), $permissions);
+		$loginUrl = $helper->getLoginUrl(route('facebookinfo'), MyFacebook::getPermissions());
 		return Redirect::to($loginUrl);
 	}
 
@@ -30,16 +30,12 @@ class FacebookController extends AdminBaseController
 		$helper = $this->fb->getRedirectLoginHelper();
 		try {
 
-			$accessToken = $helper->getAccessToken();	
-			echo 'cccccccccc';
+			$accessToken = $helper->getAccessToken();
 		} catch(Facebook\Exceptions\FacebookResponseException $e) {
 			// When Graph returns an error
-						echo 'cccccccccc';
 			echo 'Graph returned an error: ' . $e->getMessage();
-			exit;
 		} catch(Facebook\Exceptions\FacebookSDKException $e) {
 			// When validation fails or other local issues
-						echo 'cccccccccc';
 			echo 'Facebook SDK returned an error: ' . $e->getMessage();
 			exit;			
 		}
@@ -55,6 +51,8 @@ class FacebookController extends AdminBaseController
 		$response = $this->fb->get('/me', $accessToken);
 		print_r($response);
 		echo "lamdang";
+
+		echo '<a href=' + + '';
 	}
 
 	public function logout()
