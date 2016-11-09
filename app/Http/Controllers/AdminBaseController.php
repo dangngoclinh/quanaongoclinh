@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 class AdminBaseController extends Controller
 {
 	protected $data = array();
+	protected $paginate = 15;
 
 	public function __construct()
 	{

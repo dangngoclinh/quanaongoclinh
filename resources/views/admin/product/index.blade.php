@@ -8,21 +8,21 @@
         <h3 class="box-title">Tìm Kiếm</h3>
       </div>
       <div class="box-body">
-        <form class="form-inline">
+        <form action="{{ route('adminproduct') }}" method="get" class="form-inline">
           <div class="form-group">
-            <label for="inputMasanpham">Mã SP: </label>
-            <input type="text" class="form-control" name="masanpham" id="inputMasanpham" style="width: 100px;" placeholder="Mã SP">
+            <label for="inputMasp">Mã SP: </label>
+            <input type="text" class="form-control" name="masp" id="inputMasp" style="width: 100px;" placeholder="Mã SP">
           </div>
           <div class="form-group">
-            <label for="inputTensanpham"> Tên SP: </label>
-            <input type="text" class="form-control" name="tensanpham" id="inputTensanpham" placeholder="Tên SP">
+            <label for="inputTen"> Tên SP: </label>
+            <input type="text" class="form-control" name="ten" id="inputTen" placeholder="Tên SP">
           </div>
           <div class="form-group">
             <label for="inputGianhonhat"> Giá nhỏ nhất: </label>
             <input type="number" class="form-control" name="gianhonhat" id="inputGianhonhat" placeholder="20000" style="width: 100px;">
           </div>
           <div class="form-group">
-            <label for="inputPassword3"> Giá lớn nhất: </label>
+            <label for="inputGialonnhat"> Giá lớn nhất: </label>
             <input type="number" class="form-control" name="gialonnhat" id="inputGialonnhat" placeholder="10000" style="width: 100px">
           </div>          
           <div class="form-group">
@@ -55,33 +55,35 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Áo Bé Trai Cotton In Ba Chú Hề Đại Xám 4_Size 9-12T</td>
-              <td>20.000</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-							<td>
-								<a href="#" class="btn bg-olive btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
-								<a href="#" class="btn bg-maroon btn-flat"><i class="glyphicon glyphicon-remove"></i></a>
-							</td>
-						</tr>
+          @if(!empty($products))
+            @foreach($products as $product)
+  						<tr>
+  							<td>{{ $product->masp }}</td>
+  							<td>{{ str_limit($product->ten, 45) }}</td>
+                <td>{{ number_format($product->gia) }}</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+  							<td>
+  								<a href="#" class="btn bg-olive btn-sm btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
+  								<a href="#" class="btn bg-maroon btn-sm btn-flat"><i class="glyphicon glyphicon-remove"></i></a>
+  							</td>
+  						</tr>
+            @endforeach
+          @else
+          @endif
 					</tbody>
 				</table>
 			</div>
       <!-- .box-body -->
 
       <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin pull-right">
-          <li><a href="#">«</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">»</a></li>
-        </ul>
+        <a href="{{ route('adminproductadd') }}" class="btn btn-primary">Thêm Sản Phẩm</a>
+        <div class="pull-right">
+          {{ $products->links() }}
+        </div>
       </div>
       <!-- .box-footer -->
 		</div>

@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminBaseController;
+use App\TableProductCat;
+use Illuminate\Http\Request;
 
 /**
 * CategoryController
@@ -10,15 +12,19 @@ use App\Http\Controllers\AdminBaseController;
 */	
 class CategoryController extends AdminBaseController
 {
-	public function index()
+	public function index(Request $request)
 	{
+		if($request->isMethod('post'))
+		{
+			
+		}
+		$this->data['cats'] = TableProductCat::all();
 		return view('admin.category.index', $this->data);
 	}
 
 	public function edit($id)
 	{
 		return view('admin.category.edit', $this->data);
-
 	}
 
 	public function delete($id)

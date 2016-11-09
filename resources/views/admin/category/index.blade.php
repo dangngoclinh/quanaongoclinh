@@ -13,20 +13,25 @@
 						<tr>
 							<th class="col-md-1">ID</th>
 							<th class="col-md-7">Tên Category</th>
-							<th class="col-md-1">#</th>
-							<th class="col-md-3">Hành Động</th>
+							<th class="col-md-1">STT</th>
+							<th class="col-md-3"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Category</td>
-							<td>1</td>
-							<td>
-								<a href="#" class="btn bg-olive btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
-								<a href="#" class="btn bg-maroon btn-flat"><i class="glyphicon glyphicon-remove"></i></a>
-							</td>
-						</tr>
+          @if( !empty( $cats ) )
+            @foreach( $cats as $cat )
+            <tr>
+              <td>{{ $cat->id }}</td>
+              <td>{{ $cat->ten }}</td>
+              <td>{{ $cat->stt }}</td>
+              <td>
+                <a href="#" class="btn bg-olive btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
+                <a href="#" class="btn bg-maroon btn-flat"><i class="glyphicon glyphicon-remove"></i></a>
+              </td>
+            </tr>            
+            @endforeach
+          @else
+          @endif
 					</tbody>
 				</table>
 			</div>
@@ -43,17 +48,15 @@
           <div class="box-body">
             <div class="form-group">
               <label for="inputTen">Tên:</label>
-              <input type="text" name="Ten" id="inputTen" class="form-control" value="" required="required" pattern="" title="">
+              <input type="text" name="ten" id="inputTen" class="form-control" value="" required="required">
             </div>
             <div class="form-group">
               <label for="inputMota">Mô Tả:</label>
-              <textarea name="mota" id="inputMota" class="form-control" rows="3" required="required">
-              	
-              </textarea>
+              <textarea name="mota" id="inputMota" class="form-control" rows="3" required="required"></textarea>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Key:</label>
-              <input type="text" name="keyword" id="inputKeyword" class="form-control" value="" required="required" pattern="" title="">
+              <input type="text" name="keyword" id="inputKeyword" class="form-control" value="" required="required">
             </div>
             <div class="form-group">
               <label for="inputMetadescription">Meta Description:</label>

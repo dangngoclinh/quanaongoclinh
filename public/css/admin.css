@@ -29,3 +29,7 @@ label.error {
   line-height: 1.33;
   border-radius: 35px;
 }
+
+.pagination {
+  margin: 0;
+}

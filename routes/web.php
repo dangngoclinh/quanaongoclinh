@@ -27,7 +27,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('category/edit/{id}', 'CategoryController@edit')->where('id', '[0-9]+')->name('admincategoryedit');
 	Route::get('category/delete/{id}', 'CategoryController@delete')->where('id', '[0-9]+')->name('admincategorydelete');
 
-	Route::get('product', 'ProductController@index')->name('adminproduct');
+	Route::any('product', 'ProductController@index')->name('adminproduct');
 	Route::get('product/add', 'ProductController@add')->name('adminproductadd');
 	Route::get('product/edit/{id}', 'ProductController@edit')->where('name', '[0-9]+')->name('adminproductedit');
 	Route::get('product/delete/{id}', 'ProductController@delete')->where('name', '[0-9]+')->name('adminproductdelete');

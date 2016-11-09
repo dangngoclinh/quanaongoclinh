@@ -9,7 +9,7 @@ class TableUser extends Model
     protected $table = 'table_user';
 
     protected $fillable = [
-    	'id', 'username', 'password', 'ten', 'dienthoai', 'email', 'diachi', 'congtry', 'country', 'city', 'role'
+    	'username', 'password', 'ten', 'dienthoai', 'email', 'diachi', 'congtry', 'country', 'city', 'role'
     ]
 
     protected $hidden = [
