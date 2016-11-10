@@ -47,6 +47,8 @@ class ProductController extends AdminBaseController
 		{
 			$this->data['products'] = TableProduct::orderBy('id', 'desc')->paginate($this->paginate);
 		}
+		$this->data['title']     = 'Quan Ly Product';
+		$this->data['pagetitle'] = 'Quan Ly San Pham';
 		return view('admin.product.index', $this->data);
 	}
 
@@ -74,11 +76,12 @@ class ProductController extends AdminBaseController
 		{
 			case "noibat":
 				$value = 0;
-				if($product->spbc == 0)
-					$value = 1
-				$product->spbc = 1;
+				if($product->noibat == 0) {
+					$value = 1;
+				}
+				$product->noibat = 1;
 				$product->save();
-				return response()->json(['action' => 'noibat'], 'value' => $value);
+				return response()->json(['action' => 'noibat', 'value' => $value]);
 			break;
 			case "banchay":
 

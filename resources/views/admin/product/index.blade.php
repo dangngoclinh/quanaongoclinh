@@ -62,9 +62,9 @@
   							<td>{{ str_limit($product->ten, 45) }}</td>
                 <td>{{ number_format($product->gia) }}</td>
                 <td style="text-align: center;">
-                  <i class="fa fa-check-circle fa-lg status {{ !($product->spbc) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='noibat'></i></td>
+                  <i class="fa fa-check-circle fa-lg status {{ !($product->noibat) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='noibat'></i></td>
                 <td style="text-align: center;">
-                  <i class="fa fa-check-circle fa-lg status {{ !($product->banchay) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='banchay'></i></td>
+                  <i class="fa fa-check-circle fa-lg status {{ ($product->spbc == 0) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='banchay'></i></td>
                 <td style="text-align: center;">
                   <i class="fa fa-check-circle fa-lg status {{ !($product->conhang) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='conhang'></i></td>
                 <td style="text-align: center;">
@@ -98,8 +98,35 @@
 
 @section('footer_script')
 <script type="text/javascript">
-  $(documnet).ready(function() {
-    
+  $(document).ready(function() {
+    $('table.table-products .status').click(function() {
+      var ielement = $(this);
+      var data = {
+        id : $(this).attr('data-id'),
+        action : $(this).attr('data-action')
+      };
+      $.ajax({
+        header: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('adminproductaction') }}",
+        type: 'post',
+        data: data,
+        dataType: 'json',
+        success: function(result) {
+          if(data.value = 1) {
+            ielement.removeClass('disable');
+
+          }
+          else {
+            ielement.addClass('disable');
+          }
+        },
+        error: function(result) {
+
+        }
+      });
+    });
   });
 </script>
 @endsection
