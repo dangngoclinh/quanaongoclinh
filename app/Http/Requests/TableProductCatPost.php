@@ -13,7 +13,7 @@ class TableProductCatPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class TableProductCatPost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id_list'     => 'required|integer',
+            'ten'         => 'required',
+            'keyword'     => 'required',
+            'description' => 'required'
         ];
     }
 }

@@ -44,15 +44,35 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form">
+        <form role="form" action="{{ route('admincategorystore') }}" method="post">
+          {{ csrf_field() }}
           <div class="box-body">
+            @if( $errors->count() > 0 )
+              <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Lỗi!</strong>
+                @foreach( $errors->all() as $error )
+                  <p>{{ $error }}</p>
+                @endforeach
+              </div>
+            @endif
+            <div class="form-group">
+              <select name="id_list" id="input" class="form-control">
+                <option value="-1">-- Chọn Danh Sách --</option>
+                @if( !empty($lists) )
+                  @foreach( $lists as $list )
+                    <option value="{{ $list->id }}">{{ $list->ten }}</option>
+                  @endforeach
+                @endif
+              </select>
+            </div>
             <div class="form-group">
               <label for="inputTen">Tên:</label>
               <input type="text" name="ten" id="inputTen" class="form-control" value="" required="required">
             </div>
             <div class="form-group">
-              <label for="inputMota">Mô Tả:</label>
-              <textarea name="mota" id="inputMota" class="form-control" rows="3" required="required"></textarea>
+              <label for="inputMota">Slug:</label>
+              <textarea name="tenkhongdau" id="inputMota" class="form-control" rows="3" required="required"></textarea>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Key:</label>
@@ -60,7 +80,7 @@
             </div>
             <div class="form-group">
               <label for="inputMetadescription">Meta Description:</label>
-              <textarea name="metadescription" id="inputMetadescription" class="form-control" rows="3" required="required"></textarea>
+              <textarea name="description" id="inputMetadescription" class="form-control" rows="3" required="required"></textarea>
             </div>
           </div>
           <!-- /.box-body -->

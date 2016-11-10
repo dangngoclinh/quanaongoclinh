@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::get('/', 'AdminController@index')->name('admin');
 
 	Route::get('category', 'CategoryController@index')->name('admincategory');
+	Route::post('category/store', 'CategoryController@store')->name('admincategorystore');
 	Route::get('category/edit/{id}', 'CategoryController@edit')->where('id', '[0-9]+')->name('admincategoryedit');
 	Route::get('category/delete/{id}', 'CategoryController@delete')->where('id', '[0-9]+')->name('admincategorydelete');
 

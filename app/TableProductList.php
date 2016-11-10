@@ -12,11 +12,11 @@ class TableProductList extends Model
     protected $table = 'table_product_list';
 
     protected $fillable = [
-    	'ten', 'tenkhongdau', 'photo', 'thumb', 'stt', 'hienthi'
+    	'ten', 'tenkhongdau', 'photo', 'thumb', 'stt', 'hienthi', 'keyword', 'description'
     ];    
 
     public function tableproductcat()
     {
-    	return $this->hasMany('App\TableProductCat')
+    	return $this->hasMany('App\TableProductCat');
     }
 }
