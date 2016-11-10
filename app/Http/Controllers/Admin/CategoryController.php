@@ -16,6 +16,11 @@ class CategoryController extends AdminBaseController
 {
 	public function index()
 	{
+		$this->data['value'] = array(
+				'ten' => '',
+				'tenkhongdau' => '',
+				'keyword' => 'keywo'
+			);
 		$this->data['cats']  = TableProductCat::all();
 		$this->data['lists'] = TableProductList::all();
 		return view('admin.category.index', $this->data);
@@ -37,7 +42,7 @@ class CategoryController extends AdminBaseController
 			$cat->tenkhongdau = str_slug($cat->ten);
 		}
 		$cat->save();
-		return redirect('admincategoryindex');
+		return redirect()->route('admincategory');
 	}
 
 	public function edit($id)
@@ -45,8 +50,12 @@ class CategoryController extends AdminBaseController
 		return view('admin.category.edit', $this->data);
 	}
 
-	public function delete($id)
+	public function delete(Request $request)
 	{
-		return view('admin.category.delete', $this->data);
+		if($request->has('id'))
+		{
+			$cat = TableProductCat::find($request->has('id'));
+			
+		}
 	}
 }

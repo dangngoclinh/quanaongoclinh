@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TableProductCat extends Model
 {
-	const CREATED_AT = 'ngaytao';
-	const UPDATED_AT = 'ngaysua';
-
     protected $table = 'table_product_cat';
 
     protected $fillable = [

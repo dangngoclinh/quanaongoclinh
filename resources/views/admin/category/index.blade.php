@@ -2,19 +2,20 @@
 
 @section('content')
 <div class="row">
-	<div class="col-md-7">
-		<div class="box box-warning">
-            <div class="box-header">
-              <h3 class="box-title">Danh Sách Category</h3>
-            </div>
+	<div class="col-md-12">
+		<div class="box box-warning category-list">
+          <div class="box-header">
+            <h3 class="box-title">Danh Sách Category</h3>
+          </div>
 	        <div class="box-body">
 				<table class="table table-hover table-bordered">
 					<thead>
 						<tr>
 							<th class="col-md-1">ID</th>
-							<th class="col-md-7">Tên Category</th>
+              <th class="col-md-4">Tên Category</th>
+              <th class="col-md-4">Slug</th>
 							<th class="col-md-1">STT</th>
-							<th class="col-md-3"></th>
+							<th class="col-md-2"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -23,10 +24,13 @@
             <tr>
               <td>{{ $cat->id }}</td>
               <td>{{ $cat->ten }}</td>
+              <td>{{ $cat->tenkhongdau }}</td>
               <td>{{ $cat->stt }}</td>
               <td>
-                <a href="#" class="btn bg-olive btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
-                <a href="#" class="btn bg-maroon btn-flat"><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="{{ route('admincategoryedit', $cat->id) }}" class="btn bg-olive btn-flat">
+                <i class="glyphicon glyphicon-pencil"></i></a>
+                <button type="button" data-id='{{ $cat->id }}' class="btn bg-maroon btn-flat delete">
+                <i class="glyphicon glyphicon-remove"></i></button>
               </td>
             </tr>            
             @endforeach
@@ -37,7 +41,9 @@
 			</div>
 		</div>
 	</div>	
-	<div class="col-md-5">
+</div>
+<div class="row">
+	<div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">Thêm Category</h3>
@@ -68,11 +74,11 @@
             </div>
             <div class="form-group">
               <label for="inputTen">Tên:</label>
-              <input type="text" name="ten" id="inputTen" class="form-control" value="" required="required">
+              <input type="text" name="ten" id="inputTen" class="form-control" value="{{ old('ten') }}" required="required">
             </div>
             <div class="form-group">
               <label for="inputMota">Slug:</label>
-              <textarea name="tenkhongdau" id="inputMota" class="form-control" rows="3" required="required"></textarea>
+              <input type="text" name="tenkhongdau" id="inputTenkhongdau" class="form-control">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Key:</label>
@@ -94,4 +100,19 @@
       <!-- /.box -->
 	</div>
 </div>
+@endsection
+
+@section('footer_script')
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.category-list button.delete').click(function() {
+      var id = $(this).attr('data-id');
+      var verify = confirm('Bạn có chắc chắn xóa Category [' + id + '] Không');
+      if(verify)
+      {
+        alert('xoa');
+      }
+    });
+  });
+</script>
 @endsection
