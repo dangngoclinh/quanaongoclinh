@@ -33,3 +33,13 @@ label.error {
 .pagination {
   margin: 0;
 }
+
+i.status {
+  cursor: pointer;
+  color: #00a65a;
+}
+
+i.status.disable {
+  color: #dd4b39;
+}
+

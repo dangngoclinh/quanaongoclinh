@@ -106,11 +106,32 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('.category-list button.delete').click(function() {
+      var tr = $(this).closest('tr');
       var id = $(this).attr('data-id');
       var verify = confirm('Bạn có chắc chắn xóa Category [' + id + '] Không');
+      var token = $('meta[name="csrf-token"]').attr('content');
       if(verify)
       {
-        alert('xoa');
+        $.ajax({
+          url: "{{ route('admincategorydelete') }}",
+          headers: {
+            'X-CSRF-TOKEN': token
+          },
+          type: 'POST',
+          data: {
+            id: id
+          },
+          dataType: 'json',
+          success: function(data) {
+            if(data.result)
+            {
+              tr.fadeOut();
+            }
+          },
+          error: function(data) {
+            alert('Lỗi - Không thực hiện được');
+          }
+        });
       }
     });
   });

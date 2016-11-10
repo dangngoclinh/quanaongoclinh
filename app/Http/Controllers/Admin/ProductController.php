@@ -66,4 +66,32 @@ class ProductController extends AdminBaseController
 		//$this->data['id'] = 2;
 		return view('admin.product.add', $this->data);
 	}
+
+	public function action(Request $request)
+	{
+		$product = TableProduct::find($request->id);
+		switch($request->action)
+		{
+			case "noibat":
+				$value = 0;
+				if($product->spbc == 0)
+					$value = 1
+				$product->spbc = 1;
+				$product->save();
+				return response()->json(['action' => 'noibat'], 'value' => $value);
+			break;
+			case "banchay":
+
+			break;
+			case "conhang":
+
+			break;
+			case "giamgia":
+
+			break;
+			case "hienthi":
+
+			break;
+		}
+	}
 }

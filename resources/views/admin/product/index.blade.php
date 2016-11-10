@@ -40,7 +40,7 @@
       <!-- .box-header -->
 
 	    <div class="box-body">
-				<table class="table table-hover table-bordered">
+				<table class="table table-hover table-bordered table-products">
 					<thead>
 						<tr>
 							<th>Mã SP</th>
@@ -61,11 +61,16 @@
   							<td>{{ $product->masp }}</td>
   							<td>{{ str_limit($product->ten, 45) }}</td>
                 <td>{{ number_format($product->gia) }}</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+                <td style="text-align: center;">
+                  <i class="fa fa-check-circle fa-lg status {{ !($product->spbc) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='noibat'></i></td>
+                <td style="text-align: center;">
+                  <i class="fa fa-check-circle fa-lg status {{ !($product->banchay) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='banchay'></i></td>
+                <td style="text-align: center;">
+                  <i class="fa fa-check-circle fa-lg status {{ !($product->conhang) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='conhang'></i></td>
+                <td style="text-align: center;">
+                  <i class="fa fa-check-circle fa-lg status {{ !($product->hienthi) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='hienthi'></i></td>
+                <td style="text-align: center;">
+                  <i class="fa fa-check-circle fa-lg status disable" aria-hidden="true" data-id='{{ $product->id }}' data-action='giamgia'></i></td>
   							<td>
   								<a href="#" class="btn bg-olive btn-sm btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
   								<a href="#" class="btn bg-maroon btn-sm btn-flat"><i class="glyphicon glyphicon-remove"></i></a>
@@ -89,4 +94,12 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('footer_script')
+<script type="text/javascript">
+  $(documnet).ready(function() {
+    
+  });
+</script>
 @endsection

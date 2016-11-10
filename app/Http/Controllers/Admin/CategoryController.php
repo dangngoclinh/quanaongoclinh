@@ -29,13 +29,13 @@ class CategoryController extends AdminBaseController
 	public function store(TableProductCatPost $request)
 	{
 		$cat              = new TableProductCat();
-		$cat->id_list     = $request->get('id_list');
-		$cat->ten         = $request->get('ten');
-		$cat->keyword     = $request->get('keyword');
-		$cat->description = $request->get('description');
+		$cat->id_list     = $request->id_list;
+		$cat->ten         = $request->ten;
+		$cat->keyword     = $request->keyword;
+		$cat->description = $request->description;
 		if($request->has('tenkhongdau'))
 		{
-			$cat->tenkhongdau = $request->get('tenkhongdau');
+			$cat->tenkhongdau = str_slug($request->tenkhongdau);
 		}
 		else 
 		{
@@ -54,8 +54,13 @@ class CategoryController extends AdminBaseController
 	{
 		if($request->has('id'))
 		{
-			$cat = TableProductCat::find($request->has('id'));
-			
+			$cat = TableProductCat::find($request->id);
+			if($cat->count() > 0)
+			{
+				$cat->delete();
+				return response()->json(['result' => true]);
+			}
 		}
+		return response()->json(['result' => false]);
 	}
 }
