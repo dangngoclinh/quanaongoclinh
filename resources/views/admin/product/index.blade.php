@@ -8,7 +8,7 @@
         <h3 class="box-title">Tìm Kiếm</h3>
       </div>
       <div class="box-body">
-        <form action="{{ route('adminproduct') }}" method="get" class="form-inline">
+        <form action="" method="get" class="form-inline">
           <div class="form-group">
             <label for="inputMasp">Mã SP: </label>
             <input type="text" class="form-control" name="masp" id="inputMasp" style="width: 100px;" placeholder="Mã SP">
@@ -35,12 +35,12 @@
 
 		<div class="box box-warning">
       <div class="box-header">
-        <h3 class="box-title">Danh Sách Sản Phẩm</h3>
+        <h3 class="box-title">{{ $boxtitle or 'Danh Sách Sản Phẩm' }}</h3>
       </div>
       <!-- .box-header -->
 
 	    <div class="box-body">
-				<table class="table table-hover table-bordered table-products">
+				<table class="table table-hover table-bordered table-striped table-products">
 					<thead>
 						<tr>
 							<th>Mã SP</th>
@@ -70,10 +70,12 @@
                 <td style="text-align: center;">
                   <i class="fa fa-check-circle fa-lg status {{ !($product->hienthi) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='hienthi'></i></td>
                 <td style="text-align: center;">
-                  <i class="fa fa-check-circle fa-lg status disable" aria-hidden="true" data-id='{{ $product->id }}' data-action='giamgia'></i></td>
+                  <i class="fa fa-check-circle fa-lg status {{ !($product->giamgia) ? 'disable' : '' }}" aria-hidden="true" data-id='{{ $product->id }}' data-action='giamgia'></i></td>
   							<td>
-  								<a href="#" class="btn bg-olive btn-sm btn-flat"><i class="glyphicon glyphicon-pencil"></i></a>
-  								<a href="#" class="btn bg-maroon btn-sm btn-flat"><i class="glyphicon glyphicon-remove"></i></a>
+  								<a href="#" class="btn bg-olive btn-sm btn-flat" title="Sửa thông tin sản phẩm"><i class="glyphicon glyphicon-pencil"></i></a>
+  								<a href="#" class="btn bg-maroon btn-sm btn-flat action delete" title="Xóa" data-id="{{ $product->id }}">
+                    <i class="glyphicon glyphicon-remove"></i></a>
+                  <a href="#" class="btn btn-warning btn-sm btn-flat action" title="Copy"><i class="fa fa-clone"></i></a>
   							</td>
   						</tr>
             @endforeach
@@ -99,6 +101,8 @@
 @section('footer_script')
 <script type="text/javascript">
   $(document).ready(function() {
+
+    //Change Action
     $('table.table-products .status').click(function() {
       var ielement = $(this);
       var data = {
@@ -106,26 +110,74 @@
         action : $(this).attr('data-action')
       };
       $.ajax({
-        header: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        headers: {
+          'X-CSRF-TOKEN': $token
         },
         url: "{{ route('adminproductaction') }}",
-        type: 'post',
+        type: 'POST',
         data: data,
         dataType: 'json',
         success: function(result) {
-          if(data.value = 1) {
+          if(result.action == 'giamgia')
+          {
+            if(result.value == 0)
+              ielement.addClass('disable');
+            else
+              ielement.removeClass('disable');
+            return;
+          }
+          if(result.value == 1) {
+            console.log(result);
             ielement.removeClass('disable');
+            return;
+          }
 
-          }
-          else {
-            ielement.addClass('disable');
-          }
+          console.log(result);
+          ielement.addClass('disable');
         },
         error: function(result) {
-
+          console.log(result);
         }
       });
+    });
+
+    //Delete Product
+    $('table.table-products a.action.delete').click(function(event) {
+      var verify = confirm('Bạn có chắc muốn xóa sản phẩm mày ?');
+      if(!verify)
+      {
+        return;
+      }
+      event.preventDefault();
+      var tr = $(this).closest('tr');
+      var data = {
+        id : $(this).attr('data-id')
+      };
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $token
+        },
+        url: '{{ route("adminproductdelete") }}',
+        type: 'POST',
+        data: data,
+        dataType: "json",
+        success: function(result) {
+          console.log(result);
+          if(result.status)
+          {
+            tr.fadeOut();
+            return;
+          }
+          alert('Lỗi');
+        },
+        error: function(result) {
+          alert('Lỗi')
+          console.log(result);
+        }
+      });
+
+
     });
   });
 </script>

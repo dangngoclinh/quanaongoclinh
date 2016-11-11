@@ -41,7 +41,17 @@
           <ul class="treeview-menu">
             <li><a href="<?php echo URL::route('admincategory');?>"><i class="fa fa-circle-o"></i> Quản Lý Danh Mục 1</a></li>
             <li><a href="<?php echo URL::route('admincategory');?>"><i class="fa fa-circle-o"></i> Quản Lý Danh Mục 2</a></li>
-            <li><a href="<?php echo URL::route('adminproduct');?>"><i class="fa fa-circle-o"></i> Danh Sách Sản Phẩm</a></li>
+            <li>
+              <a href="{{ route('adminproduct') }}"><i class="fa fa-circle-o text-aqua">
+                </i> Danh Sách Sản Phẩm</a>
+              <ul class="treeview-menu menu-open" style="display: block;">
+                <li><a href="{{ route('adminproduct') }}">
+                  <i class="fa fa-circle-o"></i> Tất cả sản phẩm</a></li>
+                <li><a href="{{ route('adminproductspan')}}"><i class="fa fa-circle-o"></i> Sản Phẩm Ẩn</a></li>
+                <li><a href="{{ route('adminproductspgiamgia') }}"><i class="fa fa-circle-o"></i> Sản Phẩm Giảm Giá</a>
+                </li><li><a href="{{ route('adminproductsphethang') }}"><i class="fa fa-circle-o"></i> Sản Phẩm Hết Hàng</a></li>
+              </ul>
+            </li>
             <li><a href="<?php echo URL::route('adminproductadd');?>"><i class="fa fa-circle-o"></i> Thêm Sản Phẩm</a></li>
           </ul>
         </li>

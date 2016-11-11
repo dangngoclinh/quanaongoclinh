@@ -16,7 +16,7 @@ class ProductController extends AdminBaseController
 	public function index(Request $request)
 	{
 		//If Search
-		if($request->has('masp') || $request->has('ten'))
+		if($request->has('masp') || $request->has('ten') || $request->has('gianhonhat') || $request->has('gialonnhat'))
 		{
 			$where = array();
 			if($request->has('masp'))
@@ -47,8 +47,31 @@ class ProductController extends AdminBaseController
 		{
 			$this->data['products'] = TableProduct::orderBy('id', 'desc')->paginate($this->paginate);
 		}
-		$this->data['title']     = 'Quan Ly Product';
-		$this->data['pagetitle'] = 'Quan Ly San Pham';
+		$this->data['title']     = 'Quản Lý Sản Phẩm';
+		$this->data['pagetitle'] = 'Quản Lý Sản Phẩm';
+		return view('admin.product.index', $this->data);
+	}
+
+	public function span(Request $request)
+	{
+		$this->data['products'] = TableProduct::where('hienthi', '=', 0)->orderBy('id', 'desc')->paginate($this->paginate);
+		$this->data['title']     = 'Quản Lý Sản Phẩm';
+		$this->data['pagetitle'] = 'Sản Phẩm Ẩn ';
+		$this->data['boxtitle'] = 'Sản Phẩm Ẩn';
+		return view('admin.product.index', $this->data);
+	}
+
+	public function spgiamgia(Request $request)
+	{
+		$this->data['title']     = 'Quản Lý Sản Phẩm';
+		$this->data['pagetitle'] = 'Quản Lý Giảm Giá';
+		return view('admin.product.index', $this->data);
+	}
+
+	public function sphethang(Request $request)
+	{
+		$this->data['title']     = 'Quản Lý Sản Phẩm';
+		$this->data['pagetitle'] = 'Quản Lý Sản Phẩm';
 		return view('admin.product.index', $this->data);
 	}
 
@@ -58,9 +81,19 @@ class ProductController extends AdminBaseController
 
 	}
 
-	public function delete($id)
+	public function delete(Request $request)
 	{
-		return view('admin.product.delete', $this->data);
+		if($request->has('id'))
+		{
+			$product = TableProduct::find($request->id);
+			if($product->count() > 0)
+			{
+				$product->hienthi = 0;
+				$product->save();
+				return response()->json(['status' => true]);
+			}
+		}
+		return response()->json(['status' => false]);
 	}
 
 	public function add()
@@ -72,29 +105,56 @@ class ProductController extends AdminBaseController
 	public function action(Request $request)
 	{
 		$product = TableProduct::find($request->id);
+
 		switch($request->action)
 		{
 			case "noibat":
+				//return $product->toJson();
 				$value = 0;
 				if($product->noibat == 0) {
 					$value = 1;
 				}
-				$product->noibat = 1;
+				$product->noibat = $value;
 				$product->save();
-				return response()->json(['action' => 'noibat', 'value' => $value]);
+				return response()->json(['result' => true, 'action' => 'noibat', 'value' => $value]);
 			break;
 			case "banchay":
-
+				$value = 0;
+				if($product->spbc == 0) {
+					$value = 1;
+				}
+				$product->spbc = $value;
+				$product->save();
+				return response()->json(['result' => true, 'action' => 'banchay', 'value' => $value]);
 			break;
 			case "conhang":
-
+				$value = 0;
+				if($product->conhang == 0) {
+					$value = 1;
+				}
+				$product->conhang = $value;
+				$product->save();
+				return response()->json(['result' => true, 'action' => 'conhang', 'value' => $value]);
 			break;
 			case "giamgia":
-
+				$value = 0;
+				if($product->giamgia == 0) {
+					$value = 1;
+				}
+				$product->giamgia = $value;
+				$product->save();
+				return response()->json(['result' => true, 'action' => 'giamgia', 'value' => $value]);
 			break;
 			case "hienthi":
-
+				$value = 0;
+				if($product->hienthi == 0) {
+					$value = 1;
+				}
+				$product->hienthi = $value;
+				$product->save();
+				return response()->json(['result' => true, 'action' => 'hienthi', 'value' => $value]);
 			break;
 		}
+		return response()->json(['result' => false, 'id' => $request->id,  'action' => $request->action]);
 	}
 }

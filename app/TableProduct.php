@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TableProduct extends Model
 {
-	const CREATED_AT = 'ngaytao';
-	const UPDATED_AT = 'ngaysua';
+    protected $guarded = [
+        'id'
+    ];
 
     protected $table = 'table_product';
 

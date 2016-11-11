@@ -29,6 +29,7 @@
   <![endif]-->
   <script type="text/javascript">
     var $url_current = '<?php echo url()->current();?>';
+    var $token = '{{ csrf_token() }}';
   </script>
   @yield('header_script')
 </head>

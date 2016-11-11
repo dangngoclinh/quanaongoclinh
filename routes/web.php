@@ -31,8 +31,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::any('product', 'ProductController@index')->name('adminproduct');
 	Route::get('product/add', 'ProductController@add')->name('adminproductadd');
 	Route::get('product/edit/{id}', 'ProductController@edit')->where('name', '[0-9]+')->name('adminproductedit');
-	Route::get('product/delete/{id}', 'ProductController@delete')->where('name', '[0-9]+')->name('adminproductdelete');
+	Route::post('product/delete', 'ProductController@delete')->name('adminproductdelete');
 	Route::post('product/action', 'ProductController@action')->name('adminproductaction');
+	Route::get('product/span', 'ProductController@span')->name('adminproductspan');
+	Route::get('product/spgiamgia', 'ProductController@spgiamgia')->name('adminproductspgiamgia');
+	Route::get('product/sphethang', 'ProductController@sphethang')->name('adminproductsphethang');
 
 	Route::get('order', 'OrderController@index')->name('adminorder');
 	Route::get('order/add', 'OrderController@add')->name('adminorderadd');
