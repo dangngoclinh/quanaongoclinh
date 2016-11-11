@@ -114,6 +114,12 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="inputTensanpham" class="col-sm-2 control-label">Slug</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="tensanpham" id="inputTensanpham" placeholder="Tên sản phẩm">
+          </div>
+        </div>        
+        <div class="form-group">
           <label for="inputHinhanh" class="col-sm-2 control-label">Hình Ảnh</label>
           <div class="col-sm-10">
             <input type="file" name="hinhanh" id="inputHinhanh" class="form-control" required="required" accept="image/*">
