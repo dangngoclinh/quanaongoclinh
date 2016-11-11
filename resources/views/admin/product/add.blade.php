@@ -9,7 +9,7 @@
 <script src="<?php echo asset('public/plugins/jquery-validate/lang/messages_vi.min.js');?>"></script>
 <script src="<?php echo asset('public/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>"></script>
 <script>
-  $(function () {
+  $(document).ready(function () {
     //bootstrap WYSIHTML5 - text editor
     $(".textarea").wysihtml5();
 
@@ -42,6 +42,36 @@
         }
       }
     });
+
+    $('select#selectLoaisanpham1').change(function() {
+      var select2 = $('select#selectLoaisanpham2');
+      var option = $("option:selected", $(this));
+      var id = option.attr('value');
+      if(id > 0)
+      {
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $token
+          },
+          url: "{{ route('adminproductsgetcats') }}",
+          data: {
+            id: id
+          },
+          type: 'POST',
+          dataType: 'JSON',
+          success: function(result) {
+            select2.empty();
+            select2.append('<option value="-1">Chọn Loại Sản Phẩm 2</option>')
+            $.each(result.cats, function(index, value) {
+              select2.append('<option value="' + value.id + '">' + value.ten + '</option>');
+            });
+          },
+          error: function(result) {
+            console.log(result);
+          }
+        })
+      }
+    });
   });
 </script>
 @endsection
@@ -59,16 +89,21 @@
         <div class="form-group">
           <label for="inputLoaisanpham1" class="col-sm-2 control-label">Loại Sản Phẩm 1</label>
           <div class="col-sm-10">
-            <select name="loaisanpham1" id="inputLoaisanpham1" class="form-control" required="required">
-              <option value="">Chọn loại sản phẩm</option>
+            <select name="loaisanpham1" id="selectLoaisanpham1" class="form-control" required="required">
+              <option value="-1">Chọn loại sản phẩm</option>
+              @if($lists->count() > 0)
+                @foreach($lists->all() as $list)
+                  <option value="{{ $list->id }}">{{ $list->ten }}</option>
+                @endforeach
+              @endif
             </select>
           </div>
         </div>  
         <div class="form-group">
           <label for="inputLoaisanpham2" class="col-sm-2 control-label">Loại Sản Phẩm 2</label>
           <div class="col-sm-10">
-            <select name="loaisanpham2" id="inputLoaisanpham2" class="form-control" required="required">
-              <option value="">Chọn loại sản phẩm 2</option>
+            <select name="loaisanpham2" id="selectLoaisanpham2" class="form-control" required="required">
+              <option value="-1">Chọn loại sản phẩm 2</option>
             </select>
           </div>
         </div>            

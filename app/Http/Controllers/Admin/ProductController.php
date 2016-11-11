@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminBaseController;
 use App\TableProduct;
+use App\TableProductCat;
+use App\TableProductList;
 use Illuminate\Http\Request;
 
 /**
@@ -63,6 +65,7 @@ class ProductController extends AdminBaseController
 
 	public function spgiamgia(Request $request)
 	{
+		$this->data['products'] = TableProduct::where('giamgia', '=', 1)->orderBy('id', 'desc')->paginate($this->paginate);
 		$this->data['title']     = 'Quản Lý Sản Phẩm';
 		$this->data['pagetitle'] = 'Quản Lý Giảm Giá';
 		return view('admin.product.index', $this->data);
@@ -70,6 +73,7 @@ class ProductController extends AdminBaseController
 
 	public function sphethang(Request $request)
 	{
+		$this->data['products'] = TableProduct::where('hethang', '=', 0)->orderBy('id', 'desc')->paginate($this->paginate);
 		$this->data['title']     = 'Quản Lý Sản Phẩm';
 		$this->data['pagetitle'] = 'Quản Lý Sản Phẩm';
 		return view('admin.product.index', $this->data);
@@ -98,8 +102,18 @@ class ProductController extends AdminBaseController
 
 	public function add()
 	{
-		//$this->data['id'] = 2;
+		$this->data['lists'] = TableProductList::all();
 		return view('admin.product.add', $this->data);
+	}
+
+	public function getCats(Request $request)
+	{
+		$cats = TableProductCat::where('id_list', $request->id)->get();
+		if($cats->count() > 0)
+		{
+			return response()->json(['status' => true, 'cats' => $cats]);
+		}
+		return response()->json(['status' => false]);
 	}
 
 	public function action(Request $request)

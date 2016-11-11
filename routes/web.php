@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 	Route::get('product/span', 'ProductController@span')->name('adminproductspan');
 	Route::get('product/spgiamgia', 'ProductController@spgiamgia')->name('adminproductspgiamgia');
 	Route::get('product/sphethang', 'ProductController@sphethang')->name('adminproductsphethang');
+	Route::post('product/getcats', 'ProductController@getcats')->name('adminproductsgetcats');
+
 
 	Route::get('order', 'OrderController@index')->name('adminorder');
 	Route::get('order/add', 'OrderController@add')->name('adminorderadd');
