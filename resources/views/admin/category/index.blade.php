@@ -27,12 +27,28 @@
               <td>{{ $cat->tenkhongdau }}</td>
               <td>{{ $cat->stt }}</td>
               <td>
-                <a href="{{ route('admincategoryedit', $cat->id) }}" class="btn bg-olive btn-flat">
+                <a href="{{ route('admin.category.edit', $cat->id) }}" class="btn bg-olive btn-flat">
                 <i class="glyphicon glyphicon-pencil"></i></a>
                 <button type="button" data-id='{{ $cat->id }}' class="btn bg-maroon btn-flat delete">
                 <i class="glyphicon glyphicon-remove"></i></button>
               </td>
-            </tr>            
+            </tr>     
+              @if( $cat->cats->count() > 0 )    
+                @foreach($cat->cats as $item)   
+                <tr>
+                  <td>{{ $item->id }}</td>
+                  <td>---- {{ $item->ten }}</td>
+                  <td>{{ $item->tenkhongdau }}</td>
+                  <td>{{ $item->stt }}</td>
+                  <td>
+                    <a href="{{ route('admin.category.edit', $item->id) }}" class="btn bg-olive btn-flat">
+                    <i class="glyphicon glyphicon-pencil"></i></a>
+                    <button type="button" data-id='{{ $item->id }}' class="btn bg-maroon btn-flat delete">
+                    <i class="glyphicon glyphicon-remove"></i></button>
+                  </td>
+                </tr>  
+                @endforeach
+              @endif
             @endforeach
           @else
           @endif
@@ -64,10 +80,10 @@
             @endif
             <div class="form-group">
               <select name="id_list" id="input" class="form-control">
-                <option value="-1">-- Chọn Danh Sách --</option>
-                @if( !empty($lists) )
-                  @foreach( $lists as $list )
-                    <option value="{{ $list->id }}">{{ $list->ten }}</option>
+                <option value="0">-- Chọn Danh Sách --</option>
+                @if( !empty($cats) )
+                  @foreach( $cats as $cat )
+                    <option value="{{ $cat->id }}">{{ $cat->ten }}</option>
                   @endforeach
                 @endif
               </select>
